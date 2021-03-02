@@ -67,10 +67,12 @@ def twoSum(nums, target):
             if iy in result:
                 continue
             
-            y = nums[iy]            
+            y = nums[iy]
+            #print(x, "+",y ,"=", (x+y))
 
-            if (x+y)==target:
+            if (x+y)==target:                
                 result += [ix, iy]
+                break
     
     return result
 
