@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+	<title>MyWebsite</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<link href="week3.css" rel="stylesheet" type="text/css">
+<script>
+const url="https://padax.github.io/taipei-day-trip-resources/taipei-attractions.json";
+function getData(callback){
+	let req=new XMLHttpRequest();
+	req.open("GET", url);
+	//console.log(req);
+	req.onload=function(){
+		console.log("連線成功");
+		data=JSON.parse(this.responseText);
+		callback(data);
+	};
+	req.onerror=function(){
+		console.log("連線失敗");
+		console.log(this.status);
+		console.log(this.statusText);
+	};
+	req.send();
+};
+
+const pageSize=8;
+let counter=1;
+let myData=""
+
+function loadData(){
+	let databox=document.getElementById("databox");
+	//console.log(databox);
+	end_index=pageSize*counter-1
+	start_index=end_index-pageSize+1;
+	for(d=start_index; d<=end_index; d++){
+		if(d>=myData.length){
+			btn=document.getElementById("load_more_btn");
+			btn.style.display="None";
+			break;
+		};
+		num=d+1;
+		item=document.createElement("div");
+		item.setAttribute("id", "item"+num);
+		item.setAttribute("class", "item");
+		databox.appendChild(item);
+		
+		stitle=myData[d]["stitle"];
+		//console.log(stitle);
+		imgs=(myData[d]["file"]).split("http://");
+		//console.log(imgs);
+		img_link="http://"+imgs[1];
+		//console.log(img_link);
+		img_div=document.createElement("div");
+		img_div.setAttribute("class", "spot_img");
+		
+		img=document.createElement("img");
+		img.setAttribute("src", img_link);
+		img_div.appendChild(img);
+		
+		title_div=document.createElement("div");
+		title_div.textContent=stitle;
+		title_div.setAttribute("class", "spot_title");
+		
+		item.appendChild(img_div);
+		item.appendChild(title_div);
+	};
+	counter++;
+	console.log(counter);
+};
+
+function showData(data){
+	count=data["result"]["count"]
+	myData=data["result"]["results"]
+	//console.log(myData);
+	//console.log(count==myData.length);  //true
+	loadData();	
+};
+
+getData(showData);
+
+</script>
+</head>
+<body>
+	<nav>
+		<div class="logo">LOGO</div>
+		<div class="menu_toggler">
+			<button type="button" class="menu_toggler_btn">☰</button>
+		</div>
+		<div class="menu">
+			<ul>
+				<li><a href="#">Link</a></li>
+				<li><a href="#">Link</a></li>
+				<li><a href="#">Link</a></li>
+				<li><a href="#">Link</a></li>
+			</ul>
+		</div>
+	</nav>
+	<div class="banner">
+		Welcome to MyWebsite
+	</div>
+	<main>
+		<div class="box" id="databox">
+			
+		</div>
+		<button type="button" onclick="loadData();" class="load_more_btn">Load More</button>
+	</main>
+</body>
+</html>
