@@ -16,17 +16,12 @@ function getData(callback){
 		data=JSON.parse(this.responseText);
 		callback(data);
 	};
-	req.onerror=function(){
-		console.log("連線失敗");
-		console.log(this.status);
-		console.log(this.statusText);
-	};
 	req.send();
 };
 
 const pageSize=8;
 let counter=1;
-let myData=""
+let myData;
 
 function loadData(){
 	let databox=document.getElementById("databox");
