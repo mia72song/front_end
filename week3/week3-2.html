@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+	<title>MyWebsite</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<link href="week3.css" rel="stylesheet" type="text/css">
+<script>
+const url="https://padax.github.io/taipei-day-trip-resources/taipei-attractions.json";
+let p=fetch(url).then(response=>{
+    //console.log(response);
+    data=response.json();
+    //console.log(data);
+    return data;
+});
+
+const pageSize=8;
+let counter=1;
+function showData(){
+    p.then(data=>{
+        let arr=data["result"]["results"];
+        let end_index=pageSize*counter-1
+        let start_index=end_index-pageSize+1;
+        for(d=start_index; d<=end_index; d++){
+            if(d>=arr.length){
+                btn=document.getElementById("load_more_btn");
+                btn.style.display="None";
+                break;
+            };
+            stitle=arr[d]["stitle"];
+            //console.log(stitle);
+            imgs=(arr[d]["file"]).split("http://");
+            //console.log(imgs);
+            img_link="http://"+imgs[1];
+            render(stitle, img_link);
+        };
+        counter++;
+    })
+};
+
+function render(stitle, img_link){
+    let databox=document.getElementById("databox");
+    item=document.createElement("div");
+    item.setAttribute("class", "item");
+	databox.appendChild(item);
+
+    img_div=document.createElement("div");
+    img_div.setAttribute("class", "spot_img");
+    
+    img=document.createElement("img");
+    img.setAttribute("src", img_link);
+    img_div.appendChild(img);
+    
+    title_div=document.createElement("div");
+    title_div.textContent=stitle;
+    title_div.setAttribute("class", "spot_title");
+    
+    item.appendChild(img_div);
+    item.appendChild(title_div);
+};
+
+showData();
+
+</script>
+</head>
+<body>
+	<nav>
+		<div class="logo">LOGO</div>
+		<div class="menu_toggler">
+			<button type="button" class="menu_toggler_btn">☰</button>
+		</div>
+		<div class="menu">
+			<ul>
+				<li><a href="#">Link</a></li>
+				<li><a href="#">Link</a></li>
+				<li><a href="#">Link</a></li>
+				<li><a href="#">Link</a></li>
+			</ul>
+		</div>
+	</nav>
+	<div class="banner">
+		Welcome to MyWebsite
+	</div>
+	<main>
+		<div class="box" id="databox">
+			
+		</div>
+		<button type="button" onclick="showData();" class="load_more_btn">Load More</button>
+	</main>
+</body>
+</html>
