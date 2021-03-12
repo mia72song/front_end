@@ -19,8 +19,8 @@ let counter=1;
 function showData(){
     p.then(data=>{
         let arr=data["result"]["results"];
-        let end_index=pageSize*counter-1
-        let start_index=end_index-pageSize+1;
+        end_index=pageSize*counter-1
+        start_index=end_index-pageSize+1;
         for(d=start_index; d<=end_index; d++){
             if(d>=arr.length){
                 btn=document.getElementById("load_more_btn");
