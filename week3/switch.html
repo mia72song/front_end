@@ -20,16 +20,10 @@
     border-radius: 15px;
 }
 .switch-on{
-    width: 60px;
-    height: 30px;
     background-color: #C4E1FF;
-    border-radius: 15px;
 }
 .switch-on>.btn{
-    width: 30px;
-    height: 30px;
     background-color: #005AB5;
-    border-radius: 15px;
     margin-left: 30px;
 }
 </style>
@@ -42,12 +36,10 @@ class Switch extends React.Component{
         };
     }
     render(){
-        let switch_class;
+        let switch_class="switch";
         let on=this.state.on;
         if(on){
-            switch_class="switch-on";
-        }else{
-            switch_class="switch";
+            switch_class+=" switch-on";
         }
         return <div className={switch_class} onClick={this.handleClick.bind(this)}>
             <Button />
