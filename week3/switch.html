@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<style>
+.switch{
+    width: 60px;
+    height: 30px;
+    background-color: #E0E0E0;
+    border-radius: 15px;
+}
+.switch>.btn{
+    width: 30px;
+    height: 30px;
+    background-color: #4F4F4F;
+    border-radius: 15px;
+}
+.switch-on{
+    width: 60px;
+    height: 30px;
+    background-color: #C4E1FF;
+    border-radius: 15px;
+}
+.switch-on>.btn{
+    width: 30px;
+    height: 30px;
+    background-color: #005AB5;
+    border-radius: 15px;
+    margin-left: 30px;
+}
+</style>
+<script type="text/babel">
+class Switch extends React.Component{
+    constructor(props){
+        super(props);
+        this.state={
+            on:false
+        };
+    }
+    render(){
+        let switch_class;
+        let on=this.state.on;
+        if(on){
+            switch_class="switch-on";
+        }else{
+            switch_class="switch";
+        }
+        return <div className={switch_class} onClick={this.handleClick.bind(this)}>
+            <Button />
+        </div>
+    }
+    handleClick(eObj){
+        this.setState({on:!this.state.on});
+        // console.log(this.state.on);
+    }
+}
+class Button extends React.Component{
+    render(){
+        return <div className="btn"></div>
+    }
+}
+addEventListener("load", ()=>{
+    ReactDOM.render(<Switch />, document.body);
+})
+</script>
+</head>
+<body>
+    
+</body>
+</html>
