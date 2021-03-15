@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+<style>
+*{
+    margin: 0;
+    text-align: center;
+}
+.nav{
+    height: 100px;
+    background-color: black;
+    color: white; font-size: 24px;
+    line-height: 100px;
+}
+form{
+    line-height: 2;
+}
+.input_text{
+    text-align: left;
+}
+</style>
+</head>
+<body>
+    <div class="nav">觀迎光臨，請輸入帳號密碼</div>
+    <br />
+    <form action={{ url_for("signin") }} method="post">
+        <h3>登入系統</h3>
+        帳號 <input class="input_text" type="text" name="username" id="" required>
+        <br />
+        密碼 <input class="input_text" type="text" name="password" id="" required>
+        <br />
+        <input type="submit" value="登入">
+    </form>
+    
+</body>
+
+</html>

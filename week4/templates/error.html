@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error Page</title>
+<style>
+*{
+    margin: 0;
+    text-align: center;
+}
+.nav{
+    height: 100px;
+    background-color: black;
+    color: white; font-size: 24px;
+    line-height: 100px;
+}
+
+</style>
+</head>
+<body>
+    <div class="nav">失敗頁面</div>
+    <br />
+    <h3>帳號、或密碼輸入錯誤</h3>
+    <br />
+    <a href={{ url_for("index") }}>回首頁</a>
+</body>
+
+</html>
